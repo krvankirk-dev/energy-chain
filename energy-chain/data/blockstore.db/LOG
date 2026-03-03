@@ -1,0 +1,32 @@
+=============== Feb 26, 2026 (CST) ===============
+17:05:16.477498 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+17:05:16.484900 db@open opening
+17:05:16.485331 version@stat F·[] S·0B[] Sc·[]
+17:05:16.488762 db@janitor F·2 G·0
+17:05:16.488820 db@open done T·3.872545ms
+17:05:20.744989 db@close closing
+17:05:20.745136 db@close done T·143.538µs
+=============== Feb 26, 2026 (CST) ===============
+17:09:39.666826 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+17:09:39.671016 version@stat F·[] S·0B[] Sc·[]
+17:09:39.671146 db@open opening
+17:09:39.671394 journal@recovery F·1
+17:09:39.678897 journal@recovery recovering @1
+17:09:39.696249 memdb@flush created L0@2 N·25 S·2KiB "\x80\x81,v2":"\x84ha..N\x00\x01,v3"
+17:09:39.698856 version@stat F·[1] S·2KiB[2KiB] Sc·[0.25]
+17:09:39.721523 db@janitor F·3 G·0
+17:09:39.721635 db@open done T·50.42022ms
+17:10:06.957465 db@close closing
+17:10:06.957582 db@close done T·115.703µs
+=============== Feb 26, 2026 (CST) ===============
+17:10:32.461337 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+17:10:32.461629 version@stat F·[1] S·2KiB[2KiB] Sc·[0.25]
+17:10:32.461708 db@open opening
+17:10:32.461761 journal@recovery F·1
+17:10:32.462014 journal@recovery recovering @3
+17:10:32.466899 memdb@flush created L0@5 N·120 S·19KiB "\x80\x86,v28":"\x84\xe7m..\x00\x00\x01,v74"
+17:10:32.467168 version@stat F·[2] S·21KiB[21KiB] Sc·[0.50]
+17:10:32.510734 db@janitor F·4 G·0
+17:10:32.510825 db@open done T·49.101462ms
+17:11:23.343803 db@close closing
+17:11:23.343880 db@close done T·75.589µs
