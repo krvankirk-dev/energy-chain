@@ -1,15 +1,18 @@
-def energy_market(net_energy, p2p_prices, utility_price):
+def energy_market(net_energy, p2p_prices, utility_price, utility_buy_price=0.05):
     """
     net_energy: dict of house -> net energy (positive=seller, negative=buyer)
-    p2p_prices: dict of house -> price per kWh (only used for buyers)
-    utility_price: fixed price for utility
+    p2p_prices: dict of house -> price per kWh (for buyers)
+    utility_price: price for buying from utility (if demand > supply)
+    utility_buy_price: price for utility buying excess energy from sellers
     """
 
+    # Separate sellers and buyers
     sellers = {house: energy for house, energy in net_energy.items() if energy > 0}
     buyers = {house: -energy for house, energy in net_energy.items() if energy < 0}
 
     transactions = []
 
+    # First, match buyers to sellers
     for buyer, demand in buyers.items():
         remaining_demand = demand
 
@@ -18,9 +21,7 @@ def energy_market(net_energy, p2p_prices, utility_price):
             trade = min(remaining_demand, available)
 
             if trade > 0:
-                # Use buyer's P2P price
-                price = p2p_prices.get(buyer, 0.10)  # fallback to 0.10 if missing
-
+                price = p2p_prices.get(buyer, 0.10)  # buyer’s P2P price
                 transactions.append({
                     "seller": seller,
                     "buyer": buyer,
@@ -37,13 +38,23 @@ def energy_market(net_energy, p2p_prices, utility_price):
             if remaining_demand <= 0:
                 break
 
-        # Any remaining energy comes from the Utility
+        # Any remaining demand goes to Utility at regular utility price
         if remaining_demand > 0:
             transactions.append({
                 "seller": "Utility",
                 "buyer": buyer,
                 "energy_kwh": remaining_demand,
                 "price": utility_price
+            })
+
+    # Now check for **excess energy from sellers** that wasn't sold to any buyer
+    for seller, remaining in sellers.items():
+        if remaining > 0:
+            transactions.append({
+                "seller": seller,
+                "buyer": "Utility",
+                "energy_kwh": remaining,
+                "price": utility_buy_price
             })
 
     return transactions
